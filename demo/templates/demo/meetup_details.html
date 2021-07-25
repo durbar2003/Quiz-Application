@@ -4,7 +4,6 @@
 {% block site_css %}
 <link rel="stylesheet" href="{%static 'demo/styles/meetup-detail.css'%}">
 {% endblock %}
-{% block main_heading %}{{meetup.title}}{% endblock %}
 
 {% block body %}
 {% if meetup_found %}
@@ -19,11 +18,13 @@
     </section>
     <section>
         <div id="results"></div>
-        <form name= "quizform" onsubmit="return submitAnswers(answers= [{% for q in questions %} '{{ q.answer }}' {% endfor %}])">
-            {% for q in questions %}
-				<h3> {{ q.id }}.  {{ q.question }}</h3>
+        <ul>
+            {% for q in object_list %}
+            <li><a href="{% url 'q:detail' q.id %}">
+                {{ q.question }}
+            </a></li>
             {% endfor %}
-        </form>
+        </ul>
     </section>
     <section id="registration">
         <h2>Register Here</h2>

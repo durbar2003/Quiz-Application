@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.views import generic
 from .models import Meetup, Participant, Quiz
 from .forms import RegistrationForm
 
@@ -34,9 +35,15 @@ def meetup_details(request, meetup_slug):
                 'meetup_found':False
         })
 
-def qpage(request):
-    questions=Quiz.objects.all()
-    return render(request, 'meetup_details.html', { 'questions' : questions})
+class IndexView(generic.ListView):
+    model= Quiz
+    template_name= 'demo/meetup_details.html'
+
+    def get_queryset(self):
+        return Quiz.objects
+
+class DetailView(generic.DetailView):
+    model=Quiz
 
 def confirm_registration(request, meetup_slug):
     meetup=Meetup.objects.get(slug=meetup_slug)
