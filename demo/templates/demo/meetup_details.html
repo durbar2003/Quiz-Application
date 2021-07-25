@@ -1,0 +1,45 @@
+{% extends 'demo/base/base.html' %}
+{%load static%}
+{% block title %}{{meetup.title}}{% endblock %}
+{% block site_css %}
+<link rel="stylesheet" href="{%static 'demo/styles/meetup-detail.css'%}">
+{% endblock %}
+{% block main_heading %}{{meetup.title}}{% endblock %}
+
+{% block body %}
+{% if meetup_found %}
+<article>
+    <img src="{{ meetup.image.url }}" id="main-image" alt="{{ meetup.title }}">
+    <section id="details">
+        <h2>What's this Quiz about?</h2>
+        <p>{{meetup.description}}</p>
+        <footer>
+            <p>Need more details? Please <a href="">contact the organizer</a></p>
+        </footer>
+    </section>
+    <section>
+        <div id="results"></div>
+        <form name= "quizform" onsubmit="return submitAnswers(answers= [{% for q in questions %} '{{ q.answer }}' {% endfor %}])">
+            {% for q in questions %}
+				<h3> {{ q.id }}.  {{ q.question }}</h3>
+            {% endfor %}
+        </form>
+    </section>
+    <section id="registration">
+        <h2>Register Here</h2>
+        <form action="{% url 'meetup-detail' meetup.slug %}" method="POST">
+            {% csrf_token %}
+            <ul>
+            {{ form.as_ul }}
+            </ul>
+            <br>
+            <div id="registration-action">
+                <button>Register</button>
+            </div>
+        </form>
+    </section>
+</article>
+{% else %}
+<p>No meetup found for this slug!</p>
+{% endif %}
+{% endblock %}

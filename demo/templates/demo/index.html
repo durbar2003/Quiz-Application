@@ -1,0 +1,22 @@
+{% extends 'demo/base/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+    {% block site_css %}
+    <link rel="stylesheet" href="{% static 'demo/styles/all-meetups.css' %}">
+    {% endblock %}
+    {% block title %}General Quiz{% endblock %}
+    {% block main_heading %}Brought to you by QuizInc, NIT Durgapur{% endblock %}
+    {% block header_content %}
+    {% endblock %}
+
+    {% block body %}
+    <section>
+        <h2>Upcoming Quiz:</h2>
+        <ol>
+            {%for meetup_item in meetups%}
+                {% include 'demo/includes/meetup-items.html' with title=meetup_item.title image=meetup_item.image.url description=meetup_item.description slug=meetup_item.slug %}
+            {%endfor%}
+        </ol>
+    </section>
+    {% endblock %}
