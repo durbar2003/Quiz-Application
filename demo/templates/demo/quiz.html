@@ -1,0 +1,35 @@
+<!-- <h1>Questions:</h1>
+<ul>
+    {% for q in object_list %}
+    <li>
+        {{ q.question }}
+        <form method="POST" action="/search">
+            {% csrf_token %}
+            <input type="text" name="textfield">
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+
+
+    
+    <button type="submit">Upload text</button> -->
+    
+
+<div class="container">
+    <form method="POST">
+    <ul>
+        {% for q in object_list %}
+        <li>
+            {{ q.question }}
+            
+                {% csrf_token %}  
+                <textarea></textarea>
+            
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+

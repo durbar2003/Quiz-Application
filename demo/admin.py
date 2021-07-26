@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Meetup, Location, Participant, Quiz, Reply
+from .models import Meetup, Location, Participant, Quiz, Answer
 
 # Register your models here.
 
@@ -12,4 +12,4 @@ admin.site.register(Meetup, MeetupAdmin)
 admin.site.register(Location)
 admin.site.register(Participant)
 admin.site.register(Quiz)
-admin.site.register(Reply)
+admin.site.register(Answer)

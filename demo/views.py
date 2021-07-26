@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import generic
 from .models import Meetup, Participant, Quiz
-from .forms import RegistrationForm
+from .forms import RegistrationForm, QuizForm
 
 # Create your views here.
 def index(request):
@@ -37,10 +37,19 @@ def meetup_details(request, meetup_slug):
 
 class IndexView(generic.ListView):
     model= Quiz
-    template_name= 'demo/meetup_details.html'
+    template_name= 'demo/quiz.html'
 
     def get_queryset(self):
-        return Quiz.objects
+        return Quiz.objects.all()
+
+    def my_form(request):
+        if request.method=='POST':
+            form=QuizForm(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                form=QuizForm()
+            return render(request, 'demo/quiz.html', {'form': form})
 
 class DetailView(generic.DetailView):
     model=Quiz

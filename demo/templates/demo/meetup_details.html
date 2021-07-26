@@ -16,16 +16,6 @@
             <p>Need more details? Please <a href="">contact the organizer</a></p>
         </footer>
     </section>
-    <section>
-        <div id="results"></div>
-        <ul>
-            {% for q in object_list %}
-            <li><a href="{% url 'q:detail' q.id %}">
-                {{ q.question }}
-            </a></li>
-            {% endfor %}
-        </ul>
-    </section>
     <section id="registration">
         <h2>Register Here</h2>
         <form action="{% url 'meetup-detail' meetup.slug %}" method="POST">

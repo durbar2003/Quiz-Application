@@ -8,7 +8,14 @@ class Location(models.Model):
     def __str__(self):
         return f'{self.name} ({self.address})'
 
+class Answer(models.Model):
+    answer=models.TextField()
+
+    def __str__(self):
+        return self.answer    
+
 class Participant(models.Model):
+    name=models.TextField()
     email=models.EmailField(unique=True)
 
     def __str__(self):
@@ -16,15 +23,10 @@ class Participant(models.Model):
 
 class Quiz(models.Model):
     question=models.TextField()
+    ans=models.TextField(null=True)
 
     def __str__(self):
         return self.question
-
-class Reply(models.Model):
-    answer=models.TextField()
-
-    def __str__(self):
-        return self.answer
 
 class Meetup(models.Model):
     title=models.CharField(max_length=200)
